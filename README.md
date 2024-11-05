@@ -16,7 +16,7 @@
 #### Requirements
 
 * Unity
-  * Unity 2022.3.27 or later (Use 2022.3.XX)
+  * Unity 2022.3.50 or later (Use 2022.3.XX)
   * Modules:
     * visionOS Build Support
   * Render pipelines: URP
@@ -59,7 +59,7 @@ You are moe than welcome to recommend new custom Visual Scripting nodes to suppo
 #### How to setup
 
 ##### Unity
-* Install Unity [2022.3.27](https://unity.com/ja/releases/editor/whats-new/2022.3.27) or later (Use 2022.3.XX) via [Unity Hub](https://unity.com/unity-hub) with modules:
+* Install Unity 2022.3.50 or later (Use 2022.3.XX) via [Unity Hub](https://unity.com/unity-hub) with modules:
   * visionOS Build Support
 
 ##### Setup Unity project
