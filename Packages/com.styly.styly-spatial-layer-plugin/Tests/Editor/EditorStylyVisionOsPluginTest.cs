@@ -74,7 +74,7 @@ namespace Styly.VisionOs.Plugin
         }
 
         [Test]
-        public void BuildAssetBundle()
+        public void BuildAssetBundleForVisionOs()
         {
             var assetPath = $"Packages/{Config.PackageName}/Tests/Editor/TestData/Prefab/Cube.prefab";
             var assetBundleUtility = new AssetBundleUtility();
@@ -88,6 +88,24 @@ namespace Styly.VisionOs.Plugin
             Assert.That(result, Is.True);
             Assert.That(File.Exists( Path.Combine(outputPath, filename)), Is.True );
         }
+        
+        
+        [Test]
+        public void BuildAssetBundleForAndroid()
+        {
+            var assetPath = $"Packages/{Config.PackageName}/Tests/Editor/TestData/Prefab/Cube.prefab";
+            var assetBundleUtility = new AssetBundleUtility();
+            var result = assetBundleUtility.SwitchPlatform(BuildTarget.Android);
+            Assert.That(result, Is.True);
+
+            var filename = "assetbundle";
+            var outputPath = Path.Combine(Config.OutputPath,"Android");
+            result = assetBundleUtility.Build(filename, assetPath, outputPath, BuildTarget.Android);
+            
+            Assert.That(result, Is.True);
+            Assert.That(File.Exists( Path.Combine(outputPath, filename)), Is.True );
+        }
+
 
         [Test]
         public void CreateBuildInfo()
