@@ -24,11 +24,13 @@ namespace Styly.VisionOs.Plugin
             BuildContent(BuildTarget.VisionOS);
         }
 
+#if STYLY_EXPERIMENTAL
         [MenuItem(@"Assets/STYLY/Build Prefab for Android(experimental)")]
         private static void BuildAndroidContent()
         {
             BuildContent(BuildTarget.Android);
         }
+#endif
         
         private static void BuildContent(BuildTarget buildTarget)
         {
