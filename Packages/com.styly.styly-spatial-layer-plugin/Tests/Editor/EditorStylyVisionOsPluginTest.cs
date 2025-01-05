@@ -36,6 +36,19 @@ namespace Styly.VisionOs.Plugin
             Assert.That(result, Is.True);
             Assert.That(EditorUserBuildSettings.activeBuildTarget, Is.EqualTo(BuildTarget.VisionOS));
         }
+        
+        [Test]
+        public void SwitchPlatformToAndroid()
+        {
+            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneOSX);
+            Assert.That(EditorUserBuildSettings.activeBuildTarget, Is.EqualTo(BuildTarget.StandaloneOSX));
+            
+            var assetBundleUtility = new AssetBundleUtility();
+            var result = assetBundleUtility.SwitchPlatform(BuildTarget.Android);
+            
+            Assert.That(result, Is.True);
+            Assert.That(EditorUserBuildSettings.activeBuildTarget, Is.EqualTo(BuildTarget.Android));
+        }
 
         [Test]
         public void CreateThumbnail()

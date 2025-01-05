@@ -16,6 +16,10 @@ namespace Styly.VisionOs.Plugin
             {
                 return EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.VisionOS, BuildTarget.VisionOS);
             }
+            else if (buildTarget == BuildTarget.Android)
+            {
+                return EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
+            }
             return false;
         }
 
