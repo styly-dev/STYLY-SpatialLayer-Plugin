@@ -51,11 +51,13 @@ namespace Styly.VisionOs.Plugin
             CreateThumbnailUtility.MakeThumbnail(assetPath, Path.Combine(outputPath, ThumbnailFileName));
             ExportBackupFileUtility.Export(assetPath, Path.Combine(outputPath, BackupDirectoryName));
 
-            var directoryName = VisionOsDirectoryName;
-            if (buildTarget == BuildTarget.Android)
+            var directoryName = buildTarget switch
             {
-                directoryName = AndroidDirectoryName;
-            }
+                BuildTarget.VisionOS => VisionOsDirectoryName,
+                BuildTarget.Android => AndroidDirectoryName,
+                _ => "UnknownPlatform"
+            };
+
             bool buildResult = BuildAssetBundle(assetPath, Path.Combine(outputPath, directoryName), buildTarget);
             if (buildResult == false)
             {
