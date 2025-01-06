@@ -21,18 +21,18 @@ namespace Styly.VisionOs.Plugin
         [MenuItem(@"Assets/STYLY/Build Prefab")]
         private static void BuildVisionOsContent()
         {
-            BuildContent(BuildTarget.VisionOS);
+            BuildContent(new[]{BuildTarget.VisionOS});
         }
 
 #if STYLY_EXPERIMENTAL
-        [MenuItem(@"Assets/STYLY/Build Prefab for Android(experimental)")]
+        [MenuItem(@"Assets/STYLY/Build Prefab for VisionOS and Android(experimental)")]
         private static void BuildAndroidContent()
         {
-            BuildContent(BuildTarget.Android);
+            BuildContent(new[] { BuildTarget.VisionOS, BuildTarget.Android });
         }
 #endif
         
-        private static void BuildContent(BuildTarget buildTarget)
+        private static void BuildContent(BuildTarget[] buildTargets)
         {
             isProcessing = true;
 
@@ -51,19 +51,23 @@ namespace Styly.VisionOs.Plugin
             CreateThumbnailUtility.MakeThumbnail(assetPath, Path.Combine(outputPath, ThumbnailFileName));
             ExportBackupFileUtility.Export(assetPath, Path.Combine(outputPath, BackupDirectoryName));
 
-            var directoryName = buildTarget switch
+            foreach (var buildTarget in buildTargets)
             {
-                BuildTarget.VisionOS => VisionOsDirectoryName,
-                BuildTarget.Android => AndroidDirectoryName,
-                _ => "UnknownPlatform"
-            };
+                var directoryName = buildTarget switch
+                {
+                    BuildTarget.VisionOS => VisionOsDirectoryName,
+                    BuildTarget.Android => AndroidDirectoryName,
+                    _ => "UnknownPlatform"
+                };
 
-            bool buildResult = BuildAssetBundle(assetPath, Path.Combine(outputPath, directoryName), buildTarget);
-            if (buildResult == false)
-            {
-                Directory.Delete(outputPath, true);
-                return;
+                bool buildResult = BuildAssetBundle(assetPath, Path.Combine(outputPath, directoryName), buildTarget);
+                if (buildResult == false)
+                {
+                    Directory.Delete(outputPath, true);
+                    return;
+                }
             }
+            
             GenerateMetadata(assetPath, Path.Combine(outputPath, MetaFileName));
 
             ZipFile.CreateFromDirectory(outputPath, $"{outputPath}_{assetFileNameWithoutExtension}.styly");
