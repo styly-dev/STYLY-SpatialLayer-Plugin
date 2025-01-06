@@ -12,13 +12,27 @@ namespace Styly.VisionOs.Plugin
         private static bool isProcessing;
         private static readonly string ThumbnailFileName = "thumbnail.png";
         private static readonly string VisionOsDirectoryName = "VisionOS";
+        private static readonly string AndroidDirectoryName = "Android";
         private static readonly string MetaFileName = "meta.json";
         private static readonly string ParameterFileName = "parameter.json";
         private static readonly string AssetBundleFileName = "assetbundle";
         private static readonly string BackupDirectoryName = "Backup";
 
         [MenuItem(@"Assets/STYLY/Build Prefab")]
-        private static void BuildContent()
+        private static void BuildVisionOsContent()
+        {
+            BuildContent(new[]{BuildTarget.VisionOS});
+        }
+
+#if STYLY_EXPERIMENTAL
+        [MenuItem(@"Assets/STYLY/Build Prefab for visionOS and Android(experimental)")]
+        private static void BuildAndroidContent()
+        {
+            BuildContent(new[] { BuildTarget.VisionOS, BuildTarget.Android });
+        }
+#endif
+        
+        private static void BuildContent(BuildTarget[] buildTargets)
         {
             isProcessing = true;
 
@@ -36,12 +50,24 @@ namespace Styly.VisionOs.Plugin
 
             CreateThumbnailUtility.MakeThumbnail(assetPath, Path.Combine(outputPath, ThumbnailFileName));
             ExportBackupFileUtility.Export(assetPath, Path.Combine(outputPath, BackupDirectoryName));
-            bool buildResult = BuildAssetBundle(assetPath, Path.Combine(outputPath, VisionOsDirectoryName));
-            if (buildResult == false)
+
+            foreach (var buildTarget in buildTargets)
             {
-                Directory.Delete(outputPath, true);
-                return;
+                var directoryName = buildTarget switch
+                {
+                    BuildTarget.VisionOS => VisionOsDirectoryName,
+                    BuildTarget.Android => AndroidDirectoryName,
+                    _ => "UnknownPlatform"
+                };
+
+                bool buildResult = BuildAssetBundle(assetPath, Path.Combine(outputPath, directoryName), buildTarget);
+                if (buildResult == false)
+                {
+                    Directory.Delete(outputPath, true);
+                    return;
+                }
             }
+            
             GenerateMetadata(assetPath, Path.Combine(outputPath, MetaFileName));
 
             ZipFile.CreateFromDirectory(outputPath, $"{outputPath}_{assetFileNameWithoutExtension}.styly");
@@ -54,6 +80,7 @@ namespace Styly.VisionOs.Plugin
 
             isProcessing = false;
         }
+        
 
         [MenuItem(@"Assets/STYLY/Build Prefab", validate = true, priority = 10000)]
         static bool ValidateBuildContent()
@@ -76,7 +103,7 @@ namespace Styly.VisionOs.Plugin
             return outputPath;
         }
 
-        private static bool BuildAssetBundle(string assetPath, string outputPath)
+        private static bool BuildAssetBundle(string assetPath, string outputPath, BuildTarget buildTarget)
         {
 #if USE_UNITY_XR_VISIONOS
             EnablePluginProviders.EnableXRPlugin(BuildTargetGroup.VisionOS, typeof(UnityEngine.XR.VisionOS.VisionOSLoader));
@@ -84,11 +111,18 @@ namespace Styly.VisionOs.Plugin
             SetPreloadAudioData.SetPreloadDataOfAllAudioClips();
             SetPlatformRequiresReadableAssets(true);
             var assetBundleUtility = new AssetBundleUtility();
-            assetBundleUtility.SwitchPlatform(BuildTarget.VisionOS);
-            ARBuildPreprocess.ARBuildPreprocessBuild(BuildTarget.VisionOS);
-            var buildResult = assetBundleUtility.Build(AssetBundleFileName, assetPath, outputPath, BuildTarget.VisionOS);
-            File.Delete(Path.Combine(outputPath, VisionOsDirectoryName));
-            File.Delete(Path.Combine(outputPath, $"{VisionOsDirectoryName}.manifest"));
+            assetBundleUtility.SwitchPlatform(buildTarget);
+            ARBuildPreprocess.ARBuildPreprocessBuild(buildTarget);
+            var buildResult = assetBundleUtility.Build(AssetBundleFileName, assetPath, outputPath, buildTarget);
+            var directoryName = buildTarget switch
+            {
+                BuildTarget.VisionOS => VisionOsDirectoryName,
+                BuildTarget.Android => AndroidDirectoryName,
+                _ => "UnknownPlatform"
+            };
+            
+            File.Delete(Path.Combine(outputPath, directoryName));
+            File.Delete(Path.Combine(outputPath, $"{directoryName}.manifest"));
 
             return buildResult != null;
         }
