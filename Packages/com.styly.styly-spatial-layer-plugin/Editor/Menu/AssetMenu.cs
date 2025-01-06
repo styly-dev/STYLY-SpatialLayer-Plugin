@@ -25,7 +25,7 @@ namespace Styly.VisionOs.Plugin
         }
 
 #if STYLY_EXPERIMENTAL
-        [MenuItem(@"Assets/STYLY/Build Prefab for VisionOS and Android(experimental)")]
+        [MenuItem(@"Assets/STYLY/Build Prefab for visionOS and Android(experimental)")]
         private static void BuildAndroidContent()
         {
             BuildContent(new[] { BuildTarget.VisionOS, BuildTarget.Android });
@@ -114,11 +114,12 @@ namespace Styly.VisionOs.Plugin
             assetBundleUtility.SwitchPlatform(buildTarget);
             ARBuildPreprocess.ARBuildPreprocessBuild(buildTarget);
             var buildResult = assetBundleUtility.Build(AssetBundleFileName, assetPath, outputPath, buildTarget);
-            var directoryName = VisionOsDirectoryName;
-            if (buildTarget == BuildTarget.Android)
+            var directoryName = buildTarget switch
             {
-                directoryName = AndroidDirectoryName;
-            }
+                BuildTarget.VisionOS => VisionOsDirectoryName,
+                BuildTarget.Android => AndroidDirectoryName,
+                _ => "UnknownPlatform"
+            };
             
             File.Delete(Path.Combine(outputPath, directoryName));
             File.Delete(Path.Combine(outputPath, $"{directoryName}.manifest"));
