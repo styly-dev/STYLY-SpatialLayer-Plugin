@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.styly.package-collection-spatial-layer": "1.0.12",
+    "com.styly.package-collection-spatial-layer": "1.0.15",
     "com.unity.cloud.draco.webgl-2022": "1.0.0",
     "com.unity.cloud.ktx.webgl-2022": "1.0.1",
     "com.unity.collab-proxy": "2.5.2",
@@ -13,7 +13,7 @@
     "com.unity.timeline": "1.7.6",
     "com.unity.toolchain.macos-arm64-linux-x86_64": "2.0.3",
     "com.unity.ugui": "1.0.0",
-    "com.unity.visualscripting": "1.9.4",
+    "com.unity.visualscripting": "1.9.5",
     "com.unity.xr.meta-openxr": "1.0.1",
     "com.unity.xr.openxr": "1.12.1",
     "com.unity.modules.ai": "1.0.0",
@@ -57,15 +57,18 @@
         "com.from2001.gltfast-visualscripting-nodes",
         "com.from2001.spectrum-visualscripting-nodes",
         "com.from2001.vrm-visualscripting-nodes",
+        "com.openupm",
         "com.segur.poly-spatial-environment-diffuse-shader",
         "com.styly.hands",
-        "com.styly.styly-xr-rig",
         "com.styly.package-collection-spatial-layer",
+        "com.styly.shader-collection.urp",
+        "com.styly.styly-xr-rig",
         "com.styly.webrequest-visualscripting-nodes",
         "com.vrmc.gltf",
         "com.vrmc.vrm",
         "com.vrmc.vrmshaders",
         "jp.keijiro.osc-jack",
+        "jp.keijiro.osc-jack.visualscripting",
         "org.khronos.unitygltf"
       ]
     }

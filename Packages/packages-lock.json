@@ -67,7 +67,7 @@
       "url": "https://package.openupm.com"
     },
     "com.styly.package-collection-spatial-layer": {
-      "version": "1.0.12",
+      "version": "1.0.15",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -85,8 +85,17 @@
         "com.unity.xr.arfoundation": "5.1.4",
         "com.unity.xr.interaction.toolkit": "3.0.3",
         "com.unity.xr.hands": "1.4.1",
-        "com.styly.hands": "0.0.1"
+        "com.styly.hands": "0.0.1",
+        "com.unity.cinemachine": "2.10.3",
+        "com.styly.shader-collection.urp": "0.0.2"
       },
+      "url": "https://package.openupm.com"
+    },
+    "com.styly.shader-collection.urp": {
+      "version": "0.0.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://package.openupm.com"
     },
     "com.styly.styly-spatial-layer-plugin": {
@@ -118,6 +127,15 @@
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
         "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.cinemachine": {
+      "version": "2.10.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
       },
       "url": "https://packages.unity.com"
     },
@@ -378,7 +396,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.4",
+      "version": "1.9.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
