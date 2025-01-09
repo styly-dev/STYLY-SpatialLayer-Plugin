@@ -67,7 +67,7 @@
       "url": "https://package.openupm.com"
     },
     "com.styly.package-collection-spatial-layer": {
-      "version": "1.0.16",
+      "version": "1.0.17",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -87,12 +87,12 @@
         "com.unity.xr.hands": "1.4.1",
         "com.styly.hands": "0.0.1",
         "com.unity.cinemachine": "2.10.3",
-        "com.styly.shader-collection.urp": "0.0.3"
+        "com.styly.shader-collection.urp": "0.0.4"
       },
       "url": "https://package.openupm.com"
     },
     "com.styly.shader-collection.urp": {
-      "version": "0.0.3",
+      "version": "0.0.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
