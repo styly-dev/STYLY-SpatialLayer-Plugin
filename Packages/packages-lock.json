@@ -103,7 +103,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.unity.visualscripting": "1.9.4",
+        "com.unity.visualscripting": "1.9.5",
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.xr.arfoundation": "5.1.4",
         "com.unity.textmeshpro": "3.0.7",
