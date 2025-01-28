@@ -8,7 +8,6 @@ namespace Styly.VisionOs
         public const string URL_KEY = "URL";
         
         private static readonly Dictionary<string, string> systemInfo = new();
-
         public static IReadOnlyDictionary<string, string> SystemInfo => systemInfo;
 
         public static string GetInfo(string key)
