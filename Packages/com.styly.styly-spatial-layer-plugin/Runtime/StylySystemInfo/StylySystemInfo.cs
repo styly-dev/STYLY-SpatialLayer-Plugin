@@ -7,8 +7,14 @@ namespace Styly.VisionOs
     {
         public const string URL_KEY = "URL";
         
-        private static readonly Dictionary<string, string> systemInfo = new();
-
+//        private static readonly Dictionary<string, string> systemInfo = new();
+        private static readonly Dictionary<string, string> systemInfo = new Dictionary<string, string>
+        {
+            { "Key1", "Value1" },
+            { "Key2", "Value2" },
+            { "Key3", "Value3" },
+            { "URL", "styly-vos://layer/xxaatt?type=Unbounded&param1=123&param2=abcd" }
+        };
         public static IReadOnlyDictionary<string, string> SystemInfo => systemInfo;
 
         public static string GetInfo(string key)
