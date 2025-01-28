@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 namespace Styly.VisionOs.Plugin.VisualScripting
 {
     [UnitCategory("STYLY/System")]
-    [UnitTitle("GetSystemInfo")]
+    [UnitTitle("Get System Info")]
     [UnitSubtitle("STYLY")]
     public class GetSystemInfoUnit : Unit
     {
@@ -32,8 +32,26 @@ namespace Styly.VisionOs.Plugin.VisualScripting
         }
     }
     
+    [Descriptor(typeof(GetSystemInfoUnit))]
+    public class GetSystemInfoUnitDescriptor : UnitDescriptor<GetSystemInfoUnit>
+    {
+        public GetSystemInfoUnitDescriptor(GetSystemInfoUnit unit) : base(unit) {}
+
+        protected override void DefinedPort(IUnitPort port, UnitPortDescription description)
+        {
+            base.DefinedPort(port, description);
+            if (port == unit.key)
+            {
+                description.summary = "The identifier for the specific system information to retrieve.";
+            }else if (port == unit.value)
+            {
+                description.summary = "The system information associated with the specified key.";
+            }
+        }
+    }
+    
     [UnitCategory("STYLY/System")]
-    [UnitTitle("GetInfoNameList")]
+    [UnitTitle("Get System Info List")]
     [UnitSubtitle("STYLY")]
     public class GetInfoNameListUnit : Unit
     {
@@ -46,11 +64,27 @@ namespace Styly.VisionOs.Plugin.VisualScripting
 
         protected override void Definition() //The method to set what our node will be doing.
         {
-            value = ValueOutput<List<string>>("Value", (flow) =>
+            value = ValueOutput<List<string>>("Info List", (flow) =>
             {
                 resultValue = StylySystemInfo.GetInfoNameList();
                 return resultValue;
             });
+        }
+    }
+    
+    [Descriptor(typeof(GetInfoNameListUnit))]
+    public class GetInfoNameListUnitDescriptor : UnitDescriptor<GetInfoNameListUnit>
+    {
+        public GetInfoNameListUnitDescriptor(GetInfoNameListUnit unit) : base(unit) {}
+
+        protected override void DefinedPort(IUnitPort port, UnitPortDescription description)
+        {
+            base.DefinedPort(port, description);
+            
+            if (port == unit.value)
+            {
+                description.summary = "Retrieves a list of all available system information keys.";
+            }
         }
     }
 }
