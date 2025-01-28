@@ -31,26 +31,4 @@ namespace Styly.VisionOs.Plugin.VisualScripting
             });
         }
     }
-    
-    [UnitCategory("STYLY/System")]
-    [UnitTitle("Get System Info List")]
-    [UnitSubtitle("STYLY")]
-    public class GetInfoNameListUnit : Unit
-    {
-        // vale output port
-        [DoNotSerialize]
-        [PortLabelHidden]
-        public ValueOutput value;
-        
-        private List<string> resultValue;
-
-        protected override void Definition() //The method to set what our node will be doing.
-        {
-            value = ValueOutput<List<string>>("Info List", (flow) =>
-            {
-                resultValue = StylySystemInfo.GetInfoNameList();
-                return resultValue;
-            });
-        }
-    }
 }

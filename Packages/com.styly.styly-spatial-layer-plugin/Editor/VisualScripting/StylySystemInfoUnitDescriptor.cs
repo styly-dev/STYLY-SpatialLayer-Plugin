@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEngine;
 
 namespace Styly.VisionOs.Plugin.VisualScripting
 {
@@ -21,22 +18,6 @@ namespace Styly.VisionOs.Plugin.VisualScripting
             }else if (port == unit.value)
             {
                 description.summary = "The system information associated with the specified key.";
-            }
-        }
-    }
-    
-    [Descriptor(typeof(GetInfoNameListUnit))]
-    public class GetInfoNameListUnitDescriptor : UnitDescriptor<GetInfoNameListUnit>
-    {
-        public GetInfoNameListUnitDescriptor(GetInfoNameListUnit unit) : base(unit) {}
-    
-        protected override void DefinedPort(IUnitPort port, UnitPortDescription description)
-        {
-            base.DefinedPort(port, description);
-            
-            if (port == unit.value)
-            {
-                description.summary = "Retrieves a list of all available system information keys.";
             }
         }
     }

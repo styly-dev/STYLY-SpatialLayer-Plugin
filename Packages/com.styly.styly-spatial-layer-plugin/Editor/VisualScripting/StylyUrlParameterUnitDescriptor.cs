@@ -24,20 +24,4 @@ namespace Styly.VisionOs.Plugin.VisualScripting
             }
         }
     }
-    
-    [Descriptor(typeof(GetUrlParameterListUnit))]
-    public class GetUrlParameterListUnitDescriptor : UnitDescriptor<GetUrlParameterListUnit>
-    {
-        public GetUrlParameterListUnitDescriptor(GetUrlParameterListUnit unit) : base(unit) {}
-
-        protected override void DefinedPort(IUnitPort port, UnitPortDescription description)
-        {
-            base.DefinedPort(port, description);
-            
-            if (port == unit.value)
-            {
-                description.summary = "Retrieves a list of all parameter names (keys) present in the query string of a URL.";
-            }
-        }
-    }
 }

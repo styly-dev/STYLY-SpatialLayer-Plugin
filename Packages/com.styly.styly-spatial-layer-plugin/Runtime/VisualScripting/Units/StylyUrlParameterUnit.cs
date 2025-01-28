@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Codice.Client.Common.Locks;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 
 namespace Styly.VisionOs.Plugin.VisualScripting
 {
@@ -31,29 +26,6 @@ namespace Styly.VisionOs.Plugin.VisualScripting
             {
                 string keystr = flow.GetValue<string>(key);
                 resultValue = StylyUrlParameter.Get(keystr);
-                return resultValue;
-            });
-        }
-    }
-    
-    
-    [UnitCategory("STYLY/System")]
-    [UnitTitle("Get Url Parameter List")]
-    [UnitSubtitle("STYLY")]
-    public class GetUrlParameterListUnit : Unit
-    {
-        // vale output port
-        [DoNotSerialize]
-        [PortLabelHidden]
-        public ValueOutput value;
-        
-        private List<string> resultValue;
-
-        protected override void Definition() //The method to set what our node will be doing.
-        {
-            value = ValueOutput<List<string>>("Param List", (flow) =>
-            {
-                resultValue = StylyUrlParameter.GetParameterList();
                 return resultValue;
             });
         }
